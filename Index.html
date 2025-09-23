@@ -179,7 +179,7 @@
       const resp = await fetch(FORMSUBMIT, { method:'POST', body: fd });
       if (!resp.ok) throw new Error("Email service responded with " + resp.status);
       status.textContent = "提交成功！请检查邮箱。";
-      setTimeout(() => window.location.href = "https://example.com/thanks.html", 800);
+      setTimeout(() => window.location.href = "https://tianyiy519.github.io/order-form/thank-you.html", 800);
     } catch (err) {
       console.error(err);
       status.textContent = "发送失败：" + err.message + "（可重试或稍后再试）";
