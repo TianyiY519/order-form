@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>提交成功 / Submission Successful</title>
+  <style>
+    body {
+      font-family: Arial, "Microsoft Yahei", sans-serif;
+      text-align: center;
+      padding: 60px;
+      background: #f9fafb;
+      color: #111827;
+    }
+    h2 {
+      color: #16a34a;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 18px;
+      margin: 6px 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>✅ 提交成功！ / Submission Successful!</h2>
+  <p>感谢填写订单表单，我们会尽快联系您。</p>
+  <p>Thank you for completing the order form. We will get back to you shortly.</p>
+</body>
+</html>
