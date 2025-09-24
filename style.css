@@ -50,3 +50,52 @@ td button:hover {
   text-decoration: underline;
   color: #b91c1c;
 }
+
+/* ===== Mobile Friendly Layout ===== */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody tr {
+    margin-bottom: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px;
+    background: #fff;
+  }
+
+  tbody td {
+    border: none;
+    padding: 6px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  tbody td:before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #6b7280;
+    flex: 1;
+    text-align: left;
+  }
+
+  tbody td input,
+  tbody td select,
+  tbody td button {
+    flex: 2;
+    max-width: 70%;
+  }
+
+  td button {
+    text-align: right;
+    color: #dc2626;
+    font-weight: 600;
+  }
+}
