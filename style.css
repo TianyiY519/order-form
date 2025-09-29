@@ -48,21 +48,6 @@ label {
   margin-bottom:6px;
 }
 
-input, select {
-  width:100%;
-  padding:12px;
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-  background:#fff;
-  font-size:14px;
-  outline:none;
-}
-
-input:focus, select:focus {
-  border-color:var(--brand);
-  box-shadow:0 0 0 4px var(--ring);
-}
-
 .col-3 { grid-column: span 3; }
 .col-6 { grid-column: span 6; }
 .row   { grid-column: 1 / -1; }
@@ -74,7 +59,64 @@ button { cursor:pointer; font-weight:600; border:none; }
 .ghost   { background:#eef6fb; color:#0369a1; padding:12px 18px; border-radius:999px; }
 .status  { margin-top:10px; font-size:14px; color:#0369a1; }
 
-/* ===== Table styling ===== */
+/* ===== Unified Input & Select Styling ===== */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  color: inherit;
+  outline: none;
+
+  /* Remove inconsistent browser default styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Ensure consistent text size and spacing */
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+/* Highlighted border and shadow on focus */
+input:focus,
+select:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* Remove spin buttons from number inputs */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield; /* For Firefox */
+}
+
+/* Make date inputs visually consistent with text inputs */
+input[type="date"] {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 12px;
+  line-height: 1.4;
+}
+
+/* Standardize select dropdown with a custom arrow */
+select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 20 20' fill='none' stroke='%236b7280' xmlns='http://www.w3.org/2000/svg'%3E<path d='M6 8l4 4 4-4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 32px; /* Add space for the arrow */
+}
+
+/* ===== Table styling (default desktop) ===== */
 table {
   width:100%;
   border-collapse:collapse;
@@ -90,16 +132,17 @@ th, td {
 }
 th { background:#f1f5f9; }
 
+/* Desktop column widths */
 @media (min-width: 728px) {
-  th:nth-child(1), td:nth-child(1) { width: 20%; }  /* Category */
-  th:nth-child(2), td:nth-child(2) { width: 35%; }  /* Product */
-  th:nth-child(3), td:nth-child(3) { width: 15%; }  /* Unit Price */
-  th:nth-child(4), td:nth-child(4) { width: 10%; }  /* Qty */
-  th:nth-child(5), td:nth-child(5) { width: 20%; }  /* Line Total */
-  th:nth-child(6), td:nth-child(6) { width: 10%; }  /* Delete */
+  th:nth-child(1), td:nth-child(1) { width: 20%; }
+  th:nth-child(2), td:nth-child(2) { width: 35%; }
+  th:nth-child(3), td:nth-child(3) { width: 15%; }
+  th:nth-child(4), td:nth-child(4) { width: 10%; }
+  th:nth-child(5), td:nth-child(5) { width: 20%; }
+  th:nth-child(6), td:nth-child(6) { width: 10%; }
 }
 
-/* Delete button as red text */
+/* Delete button styling */
 td button {
   background: none;
   border: none;
@@ -126,10 +169,11 @@ td button:hover {
     display: none !important;
   }
 
+  /* Turn each row into a 2-column card */
   tbody tr {
     display: grid !important;
     grid-template-columns: 1fr 1fr;
-    gap: 12px; 
+    gap: 12px;
     margin-bottom: 16px;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
@@ -173,4 +217,3 @@ td button:hover {
     padding: 12px 0;
   }
 }
-
