@@ -173,3 +173,66 @@
       status.textContent = "Failed: " + err.message;
     }
   });
+
+(function() {
+  // 检查是否是移动设备
+  const isMobile = window.innerWidth <= 728;
+  
+  if (isMobile) {
+    const style = document.createElement('style');
+    style.textContent = `
+      /* 强制移动端表格输入框变大 */
+      #itemsTable input, 
+      #itemsTable select, 
+      #itemsTable button {
+        font-size: 18px !important;
+        height: 56px !important;
+        padding: 16px !important;
+        min-height: 56px !important;
+        width: 100% !important;
+        border: 2px solid #e5e7eb !important;
+        border-radius: 12px !important;
+        box-sizing: border-box !important;
+      }
+      
+      /* 下拉框特别处理 */
+      #itemsTable select {
+        background: white url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'><polyline points='6,9 12,15 18,9'></polyline></svg>") no-repeat right 16px center/20px !important;
+        padding-right: 50px !important;
+      }
+      
+      /* 只读输入框样式 */
+      #itemsTable input[readonly] {
+        background-color: #f9fafb !important;
+        border-color: #d1d5db !important;
+      }
+      
+      /* 删除按钮样式 */
+      #itemsTable td button {
+        background: #fee2e2 !important;
+        border: 2px solid #fecaca !important;
+        color: #dc2626 !important;
+        font-weight: 600 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-top: 8px;
+      }
+      
+      /* 标签文字也相应变大 */
+      #itemsTable td::before {
+        font-size: 16px !important;
+        margin-bottom: 8px !important;
+        font-weight: 600 !important;
+      }
+      
+      /* 表格单元格间距 */
+      #itemsTable td {
+        padding: 12px 0 !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    console.log('移动端输入框样式已加载');
+  }
+})();
