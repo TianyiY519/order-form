@@ -59,7 +59,7 @@ td button:hover {
   }
 
   thead {
-    display: none;
+    display: none; /* hide table header */
   }
 
   tbody tr {
@@ -71,19 +71,20 @@ td button:hover {
   }
 
   tbody td {
-    border: none;
-    padding: 6px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: none;
+    padding: 6px 0;
   }
 
-  tbody td:before {
-    content: attr(data-label);
+  tbody td::before {
+    content: attr(data-label); /* use data-label as field name */
     font-weight: 600;
     color: #6b7280;
     flex: 1;
     text-align: left;
+    padding-right: 10px;
   }
 
   tbody td input,
@@ -94,8 +95,11 @@ td button:hover {
   }
 
   td button {
-    text-align: right;
     color: #dc2626;
     font-weight: 600;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: right;
   }
 }
