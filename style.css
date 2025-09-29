@@ -52,51 +52,174 @@ td button:hover {
 }
 
 /* ===== Mobile Friendly Layout ===== */
-@media (max-width: 768px) {
+@media (max-width: 728px) {
+  /* 让小屏桌面 + 手机统一用卡片模式 */
+  th:nth-child(1),
+  th:nth-child(2),
+  th:nth-child(3),
+  th:nth-child(4),
+  th:nth-child(5),
+  th:nth-child(6),
+  td:nth-child(1),
+  td:nth-child(2),
+  td:nth-child(3),
+  td:nth-child(4),
+  td:nth-child(5),
+  td:nth-child(6) {
+    width: 100% !important;   /* 强制覆盖 */
+    display: block !important;
+  }
   table {
     border: none;
-    width: 100%;
+    width: 100% !important;
+    table-layout: auto !important;  /* 取消 fixed 布局 */
   }
+
   thead {
-    display: none;
+    display: none !important;
   }
+
   tbody tr {
-    display: block;
+    display: block !important;
     margin-bottom: 16px;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     padding: 12px;
     background: #fff;
   }
+
   tbody td {
-    display: block;
-    border: none;
+    display: block !important;
+    border: none !important;
     padding: 8px 0;
-    width: 100%;
+    width: 100% !important;         /* td 宽度强制占满整行 */
   }
+
   tbody td::before {
     content: attr(data-label);
-    display: block;     
+    display: block;
     font-weight: 600;
     color: #6b7280;
     margin-bottom: 6px;
   }
+
+  /* 新增：让输入框和下拉框更大 */
   tbody td input,
   tbody td select,
   tbody td button {
-    width: 100%;   
-    max-width: 100%;
+    width: 100% !important;        /* 输入框/下拉框占满整行 */
+    max-width: 100% !important;    /* 防止被限制 */
     box-sizing: border-box;
-    padding: 12px; 
-    font-size: 16px;
+    font-size: 16px !important;    /* 重要：增加字体大小，改善移动端体验 */
+    padding: 14px 12px !important; /* 增加内边距，让输入框更高 */
+    height: auto !important;
+    min-height: 48px;              /* 设置最小高度，确保触摸友好 */
+    line-height: 1.5 !important;
   }
+
+  /* 特别针对下拉框和输入框的样式优化 */
+  tbody td select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%236b7280' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 40px !important;
+  }
+
+  /* 删除按钮样式调整 */
   td button {
-    color: #dc2626; 
+    color: #dc2626;
     font-weight: 600;
     border: none;
     background: transparent;
     cursor: pointer;
     text-align: right;
-    padding: 12px 0;
+    padding: 14px 0 !important;
+    font-size: 16px !important;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* 覆盖桌面端的固定列宽 */
+  th, td {
+    width: 100% !important;
+  }
+
+  /* 确保表格行之间有足够的间距 */
+  tbody tr {
+    margin-bottom: 20px;
   }
 }
+/* 专门针对移动端表格输入框的样式 */
+@media (max-width: 728px) {
+  /* 强制让所有表格内的输入元素变大 */
+  #itemsTable input,
+  #itemsTable select {
+    font-size: 18px !important;
+    height: 56px !important;
+    padding: 16px !important;
+    min-height: 56px !important;
+    line-height: 1.5 !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 下拉框特别处理 */
+  #itemsTable select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><polyline points='6,9 12,15 18,9'></polyline></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 20px !important;
+    padding-right: 50px !important;
+  }
+
+  /* 只读输入框样式 */
+  #itemsTable input[readonly] {
+    background-color: #f9fafb !important;
+    border-color: #d1d5db !important;
+  }
+
+  /* 删除按钮样式 */
+  #itemsTable td button {
+    font-size: 18px !important;
+    height: 56px !important;
+    padding: 16px !important;
+    min-height: 56px !important;
+    background: #fee2e2 !important;
+    border: 2px solid #fecaca !important;
+    border-radius: 12px !important;
+    color: #dc2626 !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin-top: 8px;
+  }
+
+  /* 确保表格单元格有足够间距 */
+  #itemsTable td {
+    padding: 12px 0 !important;
+  }
+
+  /* 标签文字也相应变大 */
+  #itemsTable td::before {
+    font-size: 16px !important;
+    margin-bottom: 8px !important;
+    font-weight: 600 !important;
+  }
+
+  /* 添加另一个item按钮 */
+  .ghost {
+    font-size: 18px !important;
+    height: 56px !important;
+    padding: 16px 24px !important;
+    min-height: 56px !important;
+  }
+}
+
