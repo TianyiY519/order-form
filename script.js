@@ -58,25 +58,29 @@
     updateSubtotal();
   }
 
-  function addItemRow() {
-    const tbody = document.querySelector("#itemsTable tbody");
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>
-        <select class="category" onchange="updateProducts(this)">
-          <option value="">-- Select Category --</option>
-          <option value="dog">Dog Poop Bag</option>
-          <option value="dispenser">Poop Bag Dispenser</option>
-        </select>
-      </td>
-      <td><select class="product" onchange="updatePrice(this)"><option value="">-- Select Product --</option></select></td>
-      <td><input type="text" class="unit_price" readonly></td>
-      <td><input type="number" class="qty" min="1" value="1" oninput="updateTotal(this)"></td>
-      <td><input type="text" class="line_total" readonly></td>
-      <td><button type="button" onclick="deleteRow(this)">Delete</button></td>
-    `;
-    tbody.appendChild(tr);
-  }
+    function addItemRow() {
+      const tbody = document.querySelector("#itemsTable tbody");
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td data-label="Category">
+          <select class="category" onchange="updateProducts(this)">
+            <option value="">-- Select Category --</option>
+            <option value="dog">Dog Poop Bag</option>
+            <option value="dispenser">Poop Bag Dispenser</option>
+          </select>
+        </td>
+        <td data-label="Product">
+          <select class="product" onchange="updatePrice(this)">
+            <option value="">-- Select Product --</option>
+          </select>
+        </td>
+        <td data-label="Unit Price"><input type="text" class="unit_price" readonly></td>
+        <td data-label="Qty"><input type="number" class="qty" min="1" value="1" oninput="updateTotal(this)"></td>
+        <td data-label="Line Total"><input type="text" class="line_total" readonly></td>
+        <td data-label="Delete"><button type="button" onclick="deleteRow(this)">Delete</button></td>
+      `;
+      tbody.appendChild(tr);
+    }
 
   function deleteRow(btn) {
     btn.closest("tr").remove();
