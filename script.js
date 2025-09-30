@@ -1,6 +1,6 @@
 // ===== Mode Switch =====
   const MODE = "deploy";   // "local" = download PDF, "deploy" = send email
-  const FORMSUBMIT = "https://formsubmit.co/info@pengyuusa.com";
+  const FORMSUBMIT = "https://formsubmit.co/tianyiyang77@gmail.com";
 
   // ===== Product data =====
   const products = {
