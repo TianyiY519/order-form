@@ -145,10 +145,10 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
     const resp = await fetch(FORMSUBMIT, { method:'POST', body: fd });
     if (!resp.ok) throw new Error("Email service responded with " + resp.status);
 
-    status.textContent = "✅ Submitted successfully! Please check your email.";
+    status.textContent = "Submitted successfully! Please check your email.";
     form.reset();
   } catch (err) {
     console.error(err);
-    status.textContent = "❌ Failed: " + err.message;
+    status.textContent = "Failed: " + err.message;
   }
 });
