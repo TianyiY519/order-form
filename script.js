@@ -156,14 +156,12 @@
         URL.revokeObjectURL(url);
         status.textContent = "PDF generated and downloaded!";
       } else {
-        // deploy: send email via FormSubmit
+        // deploy: send email via FormSubmit (form only, no PDF)
         const fd = new FormData(form);
-        fd.append("attachment", pdfBlob, `order_${form.order_no.value||'no'}.pdf`);
-        fd.append("_subject", "New Order - PengYu Global (PDF attached)");
+        fd.append("_subject", "New Order - PengYu Global (Form Data Only)");
         fd.append("_template", "table");
         fd.append("_captcha", "false");
-        fd.append("_next", "https://tianyiy519.github.io/order-form/thank-you.html");
-
+        fd.append("_next", "https://tianyiy519.github.io/order-form/thank-you.html");        
         const resp = await fetch(FORMSUBMIT, { method:'POST', body: fd });
         if (!resp.ok) throw new Error("Email service responded with " + resp.status);
         status.textContent = "Submitted successfully! Please check your email.";
