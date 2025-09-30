@@ -139,35 +139,47 @@
 
   // ===== Submit handler =====
   document.getElementById('orderForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const status = document.getElementById('status');
-    status.textContent = "Processing...";
-    try {
-      const form = e.currentTarget;
-      const pdfBlob = await createPdfBlob(form);
+  e.preventDefault();
+  const status = document.getElementById('status');
+  status.textContent = "Processing...";
 
-      if (MODE === "local") {
-        // local debug: download PDF
-        const url = URL.createObjectURL(pdfBlob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "order.pdf";
-        a.click();
-        URL.revokeObjectURL(url);
-        status.textContent = "PDF generated and downloaded!";
-      } else {
-        // deploy: send email via FormSubmit (form only, no PDF)
-        const fd = new FormData(form);
-        fd.append("_subject", "New Order - PengYu Global (Form Data Only)");
-        fd.append("_template", "table");
-        fd.append("_captcha", "false");
-        // fd.append("_next", "https://tianyiy519.github.io/order-form/thank-you.html");        
-        const resp = await fetch(FORMSUBMIT, { method:'POST', body: fd });
-        if (!resp.ok) throw new Error("Email service responded with " + resp.status);
-        status.textContent = "Submitted successfully! Please check your email.";
-      }
-    } catch (err) {
-      console.error(err);
-      status.textContent = "Failed: " + err.message;
+  try {
+    const form = e.currentTarget;
+
+    // 拼接 order details
+    let details = "Order Details:\n";
+    document.querySelectorAll("#itemsTable tbody tr").forEach((row, i) => {
+      const cat = row.querySelector(".category")?.selectedOptions[0]?.text || "";
+      const prod = row.querySelector(".product")?.selectedOptions[0]?.text || "";
+      const unit = row.querySelector(".unit_price")?.value || "";
+      const qty = row.querySelector(".qty")?.value || "";
+      const total = row.querySelector(".line_total")?.value || "";
+      details += `${i+1}. ${cat} | ${prod} | ${unit} | ${qty} | ${total}\n`;
+    });
+
+    let hiddenInput = document.getElementById("order_details");
+    if (!hiddenInput) {
+      hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "order_details";
+      hiddenInput.id = "order_details";
+      form.appendChild(hiddenInput);
     }
-  });
+    hiddenInput.value = details;
+
+    const fd = new FormData(form);
+    fd.append("_subject", "New Order - PengYu Global");
+    fd.append("_template", "table");
+    fd.append("_captcha", "false");
+    // fd.append("from", form.email.value || "no-reply@pengyuusa.com");
+    // fd.append("_confirmation", "Your order has been received!");
+
+    const resp = await fetch(FORMSUBMIT, { method:'POST', body: fd });
+    if (!resp.ok) throw new Error("Email service responded with " + resp.status);
+    status.textContent = "Submitted successfully! Please check your email.";
+  } catch (err) {
+    console.error(err);
+    status.textContent = "Failed: " + err.message;
+  }
+});
+
